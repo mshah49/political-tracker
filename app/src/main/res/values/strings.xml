@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">Political Tracker</string>
+    <string name="login_button_label">Login</string>
+    <string name="signup_button_label">Sign Up</string>
+    <string name="desc_pt_logo">Political Tracker Logo</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_authenticate">AuthenticateActivity</string>
+    <string name="title_activity_main_feed">Political Tracker News Feed</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_login">Log In or Sign Up</string>
+    <string name="loginButtonLabel">Log In</string>
+    <string name="password_hint">password</string>
+    <string name="email_address_hint">email address</string>
+    <string name="ab_refresh">Refresh</string>
+    <string name="ab_logout">Log Out</string>
+
 </resources>

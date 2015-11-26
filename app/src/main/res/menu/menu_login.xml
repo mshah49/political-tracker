@@ -1,10 +1,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="me.muhammadshah.politicaltracker.LoginActivity">
+    tools:context="me.muhammadshah.politicaltracker.MainFeedActivity">
+
+
+    <item
+        android:id="@+id/refreshButton"
+        android:icon="@drawable/ic_action_refresh"
+        android:title="@string/ab_refresh" />
+
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:title="@string/action_settings" />
+
+    <item
+        android:id="@+id/logoutButton"
+        android:title="@string/ab_logout" />
 </menu>

@@ -3,7 +3,6 @@ package me.muhammadshah.politicaltracker;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
@@ -13,61 +12,32 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import com.buzzilla.webhose.client.WebhoseClient;
-import com.buzzilla.webhose.client.WebhosePost;
-import com.buzzilla.webhose.client.WebhoseResponse;
 import com.parse.ParseUser;
 
-import java.io.IOException;
-
-public class MainFeedActivity extends AppCompatActivity {
+public class MainFeedActivity extends AppCompatActivity implements AsyncResponse {
 
     protected ProgressBar mProgressBar;
     ListView listView;
 
-    private class loadWebHose extends AsyncTask<String, Void, String[]> {
-        protected String[] doInBackground(String... args) {
-            try {
-                if (args.length < 1) {
-                    Toast.makeText(MainFeedActivity.this,
-                            "API Error, Please Try Again", Toast.LENGTH_LONG).show();
-                    System.exit(1);
-                }
+    loadWebHose asyncTask =new loadWebHose();
 
-                WebhoseClient client = new WebhoseClient(args[0]);
-                WebhoseResponse response = client.search("site:telegraph.co.uk is_first:true");
-                String[] titleList;
-                titleList = new String[response.totalResults];
-                int i = 0;
 
-                for (WebhosePost post : response.posts) {
-                    titleList[i] = (post.title);
-                    i++;
-                }
-                return titleList;
-
-            } catch (IOException e2) {
-                String[] errorList;
-                errorList = new String[1];
-                errorList[0] = "error";
-                return errorList;
-            }
-        }
-
-        protected void onProgressUpdate(Integer... progress) {
-        }
-
-        protected void onPostExecute(String[] result) {
-
-        }
-
+    //this override the implemented method from asyncTask
+    public String[] processFinish(String[] output){
+        return output;
     }
 
 
         @Override
     public void onCreate(Bundle savedInstanceState) {
+
+            //this to set delegate/listener back to this class
+            asyncTask.delegate = this;
+
+            //execute the async task
+            asyncTask.execute("a52796b6-09dc-4413-af7b-9f08d894bfc2");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         handleIntent(getIntent());
@@ -76,10 +46,6 @@ public class MainFeedActivity extends AppCompatActivity {
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
 
 
-        //Webhose Calls
-        //Input API KEY
-        String[] webhoseKey = new String[1];
-        new loadWebHose().execute(webhoseKey);
 
         // Get ListView object from xml
         listView = (ListView) findViewById(R.id.newsList);

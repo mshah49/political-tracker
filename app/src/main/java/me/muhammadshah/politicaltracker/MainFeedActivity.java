@@ -3,6 +3,7 @@ package me.muhammadshah.politicaltracker;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
@@ -24,69 +25,64 @@ import java.io.IOException;
 public class MainFeedActivity extends AppCompatActivity {
 
     protected ProgressBar mProgressBar;
-    ListView listView ;
+    ListView listView;
 
-    public int webhoseTotalResults( String[] args) throws IOException {
-        if (args.length < 1) {
-            Toast.makeText(MainFeedActivity.this,
-                    "API Error, Please Try Again", Toast.LENGTH_LONG).show();
-            System.exit(1);
+    private class loadWebHose extends AsyncTask<String, Void, String[]> {
+        protected String[] doInBackground(String... args) {
+            try {
+                if (args.length < 1) {
+                    Toast.makeText(MainFeedActivity.this,
+                            "API Error, Please Try Again", Toast.LENGTH_LONG).show();
+                    System.exit(1);
+                }
+
+                WebhoseClient client = new WebhoseClient(args[0]);
+                WebhoseResponse response = client.search("site:telegraph.co.uk is_first:true");
+                String[] titleList;
+                titleList = new String[response.totalResults];
+                int i = 0;
+
+                for (WebhosePost post : response.posts) {
+                    titleList[i] = (post.title);
+                    i++;
+                }
+                return titleList;
+
+            } catch (IOException e2) {
+                String[] errorList;
+                errorList = new String[1];
+                errorList[0] = "error";
+                return errorList;
+            }
         }
 
-        WebhoseClient client = new WebhoseClient(args[0]);
-        WebhoseResponse response = client.search("site:telegraph.co.uk is_first:true");
-        return response.totalResults;
+        protected void onProgressUpdate(Integer... progress) {
+        }
+
+        protected void onPostExecute(String[] result) {
+
+        }
 
     }
 
-    public String[] webhoseTitles( String[] args ) throws IOException {
-        if (args.length < 1) {
-            Toast.makeText(MainFeedActivity.this,
-                    "API Error, Please Try Again", Toast.LENGTH_LONG).show();
-            System.exit(1);
-        }
-        try
-        WebhoseClient client = new WebhoseClient(args[0]);
-        WebhoseResponse response = client.search("site:telegraph.co.uk is_first:true");
-        String [] titleList;
-        titleList = new String[response.totalResults];
-        int i = 0;
 
-
-        for (WebhosePost post : response.posts) {
-            titleList[i]=(post.title);
-            i++;
-        }
-
-        return titleList;
-    }
-
-
-    @Override
+        @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         handleIntent(getIntent());
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
 
 
+        //Webhose Calls
+        //Input API KEY
+        String[] webhoseKey = new String[1];
+        new loadWebHose().execute(webhoseKey);
+
         // Get ListView object from xml
         listView = (ListView) findViewById(R.id.newsList);
-
-
-
-        //Webhose Calls
-
-        String [] webhoseKey = new String[1];
-        webhoseKey[0]="a52796b6-09dc-4413-af7b-9f08d894bfc2";
-        int totalResults = webhoseTotalResults(webhoseKey);
-        String [] articleTitleList = new String[totalResults];
-
-        articleTitleList = webhoseTitles("a52796b6-09dc-4413-af7b-9f08d894bfc2",);
 
         // Defined Array values to show in ListView
         String[] values = new String[] {
@@ -110,7 +106,7 @@ public class MainFeedActivity extends AppCompatActivity {
         // Forth - the Array of data
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, values);
+                android.R.layout.simple_list_item_1, android.R.id.text1,values);
 
 
         // Assign adapter to ListView

@@ -4,24 +4,9 @@
     tools:context="me.muhammadshah.politicaltracker.MainFeedActivity">
 
     <item
-        android:id="@+id/menu_search"
-        android:title="@string/menu_search"
-        app:actionViewClass="android.support.v7.widget.SearchView"
-        app:showAsAction="always"/>
-    <item
-        android:id="@+id/refreshButton"
-        android:icon="@drawable/ic_action_refresh"
-        android:title="@string/ab_refresh" />
-
-    <item
         android:id="@+id/menu_all_news"
         android:icon="@drawable/ic_action_refresh"
         android:title="@string/menu_all_news" />
-
-    <item
-        android:id="@+id/profileButton"
-        android:icon="@drawable/ic_action_refresh"
-        android:title="@string/profileButtonLabel" />
 
     <item
         android:id="@+id/menu_account_preferences"

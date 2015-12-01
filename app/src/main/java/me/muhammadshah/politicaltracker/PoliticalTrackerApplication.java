@@ -2,6 +2,7 @@ package me.muhammadshah.politicaltracker;
 
 import android.app.Application;
 
+import com.buzzilla.webhose.client.WebhoseClient;
 import com.parse.Parse;
 import com.parse.ParseACL;
 
@@ -10,10 +11,6 @@ public class PoliticalTrackerApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
-		/*
-		 * Add Parse initialization code here
-		 */
 
         //Parse
         // Enable Local Data store.
@@ -28,5 +25,9 @@ public class PoliticalTrackerApplication extends Application {
         defaultACL.setPublicReadAccess(true);
 
         ParseACL.setDefaultACL(defaultACL, true);
+
+        //Webhose
+        //API KEY
+        WebhoseClient client = new WebhoseClient("a52796b6-09dc-4413-af7b-9f08d894bfc2");
     }
 }

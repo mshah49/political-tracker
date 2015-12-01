@@ -1,12 +1,35 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="me.muhammadshah.politicaltracker.MainFeedActivity">
 
-
+    <item
+        android:id="@+id/menu_search"
+        android:title="@string/menu_search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="always"/>
     <item
         android:id="@+id/refreshButton"
         android:icon="@drawable/ic_action_refresh"
         android:title="@string/ab_refresh" />
+
+    <item
+        android:id="@+id/menu_upgrade"
+        android:icon="@drawable/ic_action_refresh"
+        android:title="@string/menu_upgrade" />
+    <item
+        android:id="@+id/menu_subscriptions"
+        android:icon="@drawable/ic_action_refresh"
+        android:title="@string/menu_subscriptions" />
+    <item
+        android:id="@+id/menu_all_news"
+        android:icon="@drawable/ic_action_refresh"
+        android:title="@string/menu_all_news" />
+
+    <item
+        android:id="@+id/menu_account_preferences"
+        android:icon="@drawable/ic_action_refresh"
+        android:title="@string/menu_account_preferences" />
 
     <item
         android:id="@+id/action_settings"

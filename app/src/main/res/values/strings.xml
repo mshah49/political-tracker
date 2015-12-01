@@ -7,6 +7,13 @@
     <string name="title_activity_authenticate">AuthenticateActivity</string>
     <string name="title_activity_main_feed">Political Tracker News Feed</string>
     <string name="menu_settings">Settings</string>
+    <string name="menu_upgrade">Upgrade</string>
+    <string name="menu_subscriptions">Subscriptions</string>
+    <string name="menu_all_news">All News</string>
+    <string name="menu_account_preferences">Account Preferences</string>
+    <string name="menu_search">Settings</string>
+    <string name="search_hint">Search</string>
+    <string name="search_result">Search Results</string>
     <string name="title_activity_login">Log In or Sign Up</string>
     <string name="loginButtonLabel">Log In</string>
     <string name="password_hint">password</string>

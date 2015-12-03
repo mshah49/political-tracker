@@ -71,7 +71,7 @@ public class AuthenticateActivity extends AppCompatActivity {
                             mProgressBar.setVisibility(View.INVISIBLE);
                             if (e==null){
                                 //Let them use App
-                                startActivity(new Intent(AuthenticateActivity.this, MainFeedActivity.class));
+                                startActivity(new Intent(AuthenticateActivity.this, ProfileActivity.class));
                             } else{
                                 Toast.makeText(AuthenticateActivity.this,
                                         "Sign up failed! Try again.",Toast.LENGTH_LONG).show();
@@ -91,7 +91,7 @@ public class AuthenticateActivity extends AppCompatActivity {
                                         // Hooray! The user is logged in.
                                         startActivity(new Intent(
                                                 AuthenticateActivity.this,
-                                                MainFeedActivity.class));
+                                                ProfileActivity.class));
                                     } else {
                                         // Login failed. Look at the
                                         // ParseException to see what happened.

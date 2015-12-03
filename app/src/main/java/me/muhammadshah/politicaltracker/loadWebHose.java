@@ -18,7 +18,7 @@ public class loadWebHose extends AsyncTask<String, Void, String[]> {
             }
 
             WebhoseClient client = new WebhoseClient(args[0]);
-            WebhoseResponse response = client.search("site:yahoo.com is_first:true  language:english");
+            WebhoseResponse response = client.search("site:memeorandum.com is_first:true  language:english");
             String[] titleList;
             titleList = new String[response.totalResults];
             int i = 0;

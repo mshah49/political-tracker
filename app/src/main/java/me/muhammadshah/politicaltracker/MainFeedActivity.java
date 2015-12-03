@@ -22,21 +22,28 @@ public class MainFeedActivity extends AppCompatActivity implements AsyncResponse
 
     loadWebHose asyncTask =new loadWebHose();
 
-
     //this override the implemented method from asyncTask
-    public String[] processFinish(String[] output){
-        return output;
+    public void processFinish(String[] output){
+        //Here you will receive the result fired from async class
+        //of onPostExecute(result) method.
+        listView = (ListView) findViewById(R.id.newsList);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, android.R.id.text1,output);
+
+        // Assign adapter to ListView
+        listView.setAdapter(adapter);
     }
 
 
         @Override
     public void onCreate(Bundle savedInstanceState) {
 
-            //this to set delegate/listener back to this class
-            asyncTask.delegate = this;
+        //this to set delegate/listener back to this class
+        asyncTask.delegate = this;
 
-            //execute the async task
-            asyncTask.execute("a52796b6-09dc-4413-af7b-9f08d894bfc2");
+        //execute the async task
+        asyncTask.execute("a52796b6-09dc-4413-af7b-9f08d894bfc2");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -44,40 +51,6 @@ public class MainFeedActivity extends AppCompatActivity implements AsyncResponse
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
-
-
-
-        // Get ListView object from xml
-        listView = (ListView) findViewById(R.id.newsList);
-
-        // Defined Array values to show in ListView
-        String[] values = new String[] {
-                "UK Prime Minister David Cameron calls for British air strikes against IS in Syria",
-                "Gunman attacks Planned Parenthood clinic, killing three, before surrendering",
-                "Navigator of downed Russian jet found alive in Syria",
-                "At least 52, including six Shia Muslim activists, to be executed in Saudi Arabia",
-                "New Polish government takes down findings on Russian air disaster",
-                "Athens bomb targets business group, damages Cypriot embassy",
-                "Canadian politician Manmeet Bhullar dies aged 35 after traffic collision",
-                "Pakistani female fighter pilot Marium Mukhtiar dies in jet crash",
-                "Ferry MV Suilven sinks in Suva, Fiji",
-                "Suspects detained in Belgium raids",
-                "Barça thrashes Real Madrid 4-0 in first El Clásico 2015/2016"
-        };
-
-        // Define a new Adapter
-        // First parameter - Context
-        // Second parameter - Layout for the row
-        // Third parameter - ID of the TextView to which the data is written
-        // Forth - the Array of data
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1,values);
-
-
-        // Assign adapter to ListView
-        listView.setAdapter(adapter);
-
     }
 
     @Override

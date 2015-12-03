@@ -15,6 +15,8 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
+import java.util.Arrays;
+
 public class AuthenticateActivity extends AppCompatActivity {
 
 
@@ -57,6 +59,12 @@ public class AuthenticateActivity extends AppCompatActivity {
                     ParseUser user = new ParseUser();
                     user.setUsername(username);
                     user.setPassword(password);
+
+                    //Add follows/unfollows
+
+                    user.addAllUnique("follow", Arrays.asList("World News", "Elections", "Taxes"));
+                    user.addAllUnique("unfollow", Arrays.asList("Gun Control","Health Care"));
+                    user.saveInBackground();
 
                     user.signUpInBackground(new SignUpCallback() {
                         public void done(ParseException e) {

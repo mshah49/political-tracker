@@ -8,9 +8,6 @@ import com.buzzilla.webhose.client.WebhoseResponse;
 
 import java.io.IOException;
 
-/**
- * Created by Muhammad on 12/1/2015.
- */
 public class loadWebHose extends AsyncTask<String, Void, String[]> {
     public AsyncResponse delegate = null;
 
@@ -21,7 +18,7 @@ public class loadWebHose extends AsyncTask<String, Void, String[]> {
             }
 
             WebhoseClient client = new WebhoseClient(args[0]);
-            WebhoseResponse response = client.search("site:telegraph.co.uk is_first:true");
+            WebhoseResponse response = client.search("site:yahoo.com is_first:true  language:english");
             String[] titleList;
             titleList = new String[response.totalResults];
             int i = 0;
@@ -44,6 +41,7 @@ public class loadWebHose extends AsyncTask<String, Void, String[]> {
     }
 
     protected void onPostExecute(String[] result) {
+
         delegate.processFinish(result);
     }
 
